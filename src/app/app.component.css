@@ -1,0 +1,81 @@
+ h1{
+    font-weight: 400;
+    font-size: 1.5rem;
+ }
+ .movie{
+    border: none;
+    background-size: 100%;
+    background-repeat: no-repeat; 
+    min-height: 170px;
+    transition: 3s !important;
+    cursor: pointer;
+ }
+ .movie:hover{
+    animation-duration: 3s;
+    animation-name: moverBg;
+    background-size: cover;
+ }
+ .movie .overlay{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgb(0, 0, 0, 0.7);
+    
+ }
+ 
+ .btn-seedetails{
+    color: white;
+    font-size: 0.8rem;
+    border: white !important;
+ }
+ 
+.pagination li{
+    background-color: #222529 !important;
+}
+.pagination a{
+    background-color: #222529 !important;
+    color: white 
+}
+.search{
+    max-width: 250px !important;
+}
+
+
+ @keyframes moverBg {
+    from {
+      background-size: 100%;
+    }
+  
+    to {
+        background-size: 110%;
+    }
+  }
+  @keyframes moverBgSmall {
+    from {
+      background-size: cover;
+    }
+  
+    to {
+        background-size: calc(cover + 20%);
+    }
+  }
+  .btn-star{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 1.2rem;
+    
+  }
+
+  .selected{
+    color: #dc3545 !important; 
+  }
+  .icon-star{
+   color: rgb(180, 180, 180);
+  }
+  .icon-star:hover{
+    color: #dc3545;
+  }
+  

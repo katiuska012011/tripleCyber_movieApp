@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+
+<div class="main m-0 bg-dark animate__animated animate__fadeIn">
+    <div class="container pt-4">
+        <div *ngIf="!loading && favorites.length > 0" class="d-flex justify-content-between" id="favorites">
+            <h1 class="text-white" id="lastMovies">Favorites</h1>
+
+        </div>
+        <div class="row">
+            <ng-container *ngIf="!loading && favorites.length > 0">
+                <div *ngFor="let movie of favorites" (click)="open(movie)" class="col-md-3 my-3 animate__animated animate__fadeIn"
+                    ngbPopover="{{movie.overview}}" triggers="mouseenter:mouseleave">
+                    <div class="card movie position-relative" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/w500/'+movie.backdrop_path
+                        +')'}">
+                        <div class="overlay p-3">
+                            <button (click)="addToFavorite(movie); $event.stopPropagation();" class="btn btn-star"><i
+                                    class="feather icon-star selected"></i></button>
+                            <div class="d-flex align-items-end w-100" style="height: 100%;">
+                                <div class="w-100">
+                                    <h5 class="card-title text-white">{{movie.title}}</h5>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="#" class="btn btn-seedetails p-0">See Details</a>
+                                        <ngb-rating class="text-white" [rate]="4"></ngb-rating>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+
+        <div class="d-flex justify-content-between">
+            <h1 class="text-white" id="lastMovies">Last Movies</h1>
+            <input (keyup)="Search()" [(ngModel)]="search" class="form-control search py-0 text-white me-2 bg-dark"
+                type="search" placeholder="Search">
+        </div>
+
+        <div class="row">
+            <ng-container *ngIf="!loading else loader">
+                <div *ngFor="let movie of moviesTemp" (click)="open(movie)" class="col-md-3 my-3 animate__animated animate__fadeIn"
+                    ngbPopover="{{movie.overview}}" triggers="mouseenter:mouseleave">
+                    <div class="card movie position-relative" [ngStyle]="{'background-image': 'url(https://image.tmdb.org/t/p/w500/'+movie.backdrop_path
+                        +')'}">
+                        <div class="overlay p-3">
+                            <button (click)="addToFavorite(movie); $event.stopPropagation()" class="btn btn-star">
+                                <i class="feather icon-star" [ngClass]="{'selected': isInFavorite(movie)}"></i>
+                            </button>
+
+                            <div class="d-flex align-items-end w-100" style="height: 100%;">
+                                <div class="w-100">
+                                    <h5 class="card-title text-white">{{movie.title}}</h5>
+                                    <div class="d-flex justify-content-between">
+                                        <a href="#" class="btn btn-seedetails p-0">See Details</a>
+                                        <ngb-rating class="text-white" [rate]="4"></ngb-rating>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+        <div class="py-4">
+            <ul class="pagination mb-0 justify-content-end">
+                <li class="page-item" [ngClass]="{'disabled' : page == 1}">
+                    <a (click)="page= page-1; getMovies()" class="page-link" href="#">Previous</a>
+                </li>
+                <li *ngIf="page > 1" class="page-item"><a (click)="page= page-1; getMovies()" class="page-link"
+                        href="#">{{page-1}}</a></li>
+                <li class="page-item"><a class="page-link" href="#">{{page}}</a></li>
+                <li class="page-item"><a (click)="page= page+1; getMovies()" class="page-link" href="#">{{page+1}}</a>
+                </li>
+                <li class="page-item">
+                    <a (click)="page= page+1; getMovies()" class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<ng-template #loader>
+    <div class="spinner-border mt-4" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</ng-template>
+ 

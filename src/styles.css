@@ -1,0 +1,11 @@
+@import "./assets/fonts/feather/style.css";
+.popover {
+    background-color: #222529 !important;
+    min-width: 300px !important;
+}
+.popover-arrow{
+    background-color: #222529 !important;
+}
+.popover .popover-body {
+    color: white !important
+}
